@@ -242,7 +242,7 @@ public class ArrayList<E> extends AbstractList<E>
     private void ensureCapacityInternal(int minCapacity) {
         //尝试扩容 -> 通过数组长度+1 与 数组长度 比较 查看是否溢出
         ensureExplicitCapacity(
-                // 计算容量 -> 如果位空则设置为  DEFAULT_CAPACITY（10）
+                // 初始化容量或者默认给的值 -> 如果数组为空则设置为  DEFAULT_CAPACITY（10）
                 calculateCapacity(elementData, minCapacity)
         );
     }
@@ -273,8 +273,7 @@ public class ArrayList<E> extends AbstractList<E>
      * @param minCapacity the desired minimum capacity
      */
     private void grow(int minCapacity) {
-        // overflow-conscious code
-        // 记录溢出的容量
+        // overflow-conscious code 记录溢出的容量
         int oldCapacity = elementData.length;
         // newCapacity = oldCapacity * 1.5  （oldCapacity >> 1 减小一半）
         // 即扩容1.5倍

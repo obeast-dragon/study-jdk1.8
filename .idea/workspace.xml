@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51a8d586-b94d-4dc2-aa7e-a0f0fe5e7630" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/demo/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/demo/SimpleHashMap.java" afterDir="false" />
+    <list default="true" id="51a8d586-b94d-4dc2-aa7e-a0f0fe5e7630" name="Default Changelist" comment="ArrayList 源码学习">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/java/nio/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/java/nio/Buffer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/java/util/ArrayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/java/util/ArrayList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/testDemo/testHashMap.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,8 +166,16 @@
       <workItem from="1661484098112" duration="16107000" />
       <workItem from="1661908779387" duration="21866000" />
       <workItem from="1661959175605" duration="1710000" />
-      <workItem from="1663291014882" duration="846000" />
+      <workItem from="1663291014882" duration="1550000" />
     </task>
+    <task id="LOCAL-00001" summary="ArrayList 源码学习">
+      <created>1663313997611</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1663313997611</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,6 +191,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ArrayList 源码学习" />
+    <option name="LAST_COMMIT_MESSAGE" value="ArrayList 源码学习" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

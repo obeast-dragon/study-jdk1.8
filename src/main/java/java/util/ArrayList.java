@@ -124,7 +124,8 @@ public class ArrayList<E> extends AbstractList<E>
      * Shared empty array instance used for default sized empty instances. We
      * distinguish this from EMPTY_ELEMENTDATA to know how much to inflate when
      * first element is added.
-     * 初始化空数组
+     * 默认容量空元素数据
+     *  初始化空数组
      */
     private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
 
@@ -239,7 +240,11 @@ public class ArrayList<E> extends AbstractList<E>
     }
 
     private void ensureCapacityInternal(int minCapacity) {
-        ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));
+        //尝试扩容 -> 通过数组长度+1 与 数组长度 比较 查看是否溢出
+        ensureExplicitCapacity(
+                // 计算容量 -> 如果位空则设置为  DEFAULT_CAPACITY（10）
+                calculateCapacity(elementData, minCapacity)
+        );
     }
 
     private void ensureExplicitCapacity(int minCapacity) {
@@ -269,12 +274,17 @@ public class ArrayList<E> extends AbstractList<E>
      */
     private void grow(int minCapacity) {
         // overflow-conscious code
+        // 记录溢出的容量
         int oldCapacity = elementData.length;
-        //oldCapacity >> 1 减小一半
-        // newCapacity = oldCapacity * 1.5
+        // newCapacity = oldCapacity * 1.5  （oldCapacity >> 1 减小一半）
+        // 即扩容1.5倍
         int newCapacity = oldCapacity + (oldCapacity >> 1);
+
+        //处理特殊情况1 newCapacity < minCapacity
         if (newCapacity - minCapacity < 0)
             newCapacity = minCapacity;
+        //处理特殊情况2 newCapacity < MAX_ARRAY_SIZE
+        //MAX_ARRAY_SIZE = 2,147,483,639  Integer.MAX_VALUE - 8
         if (newCapacity - MAX_ARRAY_SIZE > 0)
             newCapacity = hugeCapacity(minCapacity);
         // minCapacity is usually close to size, so this is a win:

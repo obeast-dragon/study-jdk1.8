@@ -182,9 +182,13 @@ public abstract class Buffer {
         Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.ORDERED;
 
     // Invariants: mark <= position <= limit <= capacity
+    //标记
     private int mark = -1;
+    //当前数组的索引
     private int position = 0;
+    //最大能读取多少个
     private int limit;
+    //最大容量
     private int capacity;
 
     // Used only by direct buffers
@@ -212,6 +216,7 @@ public abstract class Buffer {
      * Returns this buffer's capacity.
      *
      * @return  The capacity of this buffer
+     * 获取当前缓冲区的的容量
      */
     public final int capacity() {
         return capacity;
@@ -221,6 +226,8 @@ public abstract class Buffer {
      * Returns this buffer's position.
      *
      * @return  The position of this buffer
+     *
+     * 获取当前缓冲区的的 索引
      */
     public final int position() {
         return position;
@@ -238,6 +245,8 @@ public abstract class Buffer {
      *
      * @throws  IllegalArgumentException
      *          If the preconditions on <tt>newPosition</tt> do not hold
+     *
+     *   设置当前缓冲区的的 索引
      */
     public final Buffer position(int newPosition) {
         if ((newPosition > limit) || (newPosition < 0))
@@ -251,6 +260,8 @@ public abstract class Buffer {
      * Returns this buffer's limit.
      *
      * @return  The limit of this buffer
+     *
+     * 获取当前缓冲区的的 限制
      */
     public final int limit() {
         return limit;
@@ -269,6 +280,7 @@ public abstract class Buffer {
      *
      * @throws  IllegalArgumentException
      *          If the preconditions on <tt>newLimit</tt> do not hold
+     * 设置当前缓冲区的的 限制
      */
     public final Buffer limit(int newLimit) {
         if ((newLimit > capacity) || (newLimit < 0))
@@ -354,6 +366,7 @@ public abstract class Buffer {
      * @return  This buffer
      */
     public final Buffer flip() {
+        // 重新赋值position
         limit = position;
         position = 0;
         mark = -1;

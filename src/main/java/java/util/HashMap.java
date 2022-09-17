@@ -239,6 +239,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * The maximum capacity, used if a higher value is implicitly specified
      * by either of the constructors with arguments.
      * MUST be a power of two <= 1<<30.
+     * 2的30次方
      * 初始化容量
      */
     static final int MAXIMUM_CAPACITY = 1 << 30;
@@ -479,7 +480,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * (16) and the default load factor (0.75).
      */
     public HashMap() {
-        this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted
+        this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted;  DEFAULT_LOAD_FACTOR 0.75f
     }
 
     /**
@@ -644,7 +645,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             n = (tab = resize()).length;
         }
 
-        //判断尾部是否为空然后进行  尾插法
+        //判断数组尾部是否为空然后进行
         if ((p = tab[i = (n - 1) & hash]) == null)
             //当前节点为空
             tab[i] = newNode(hash, key, value, null);
@@ -667,7 +668,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                 //否则为链表逻辑
                 for (int binCount = 0; ; ++binCount) {
                     if ((e = p.next) == null) {
-                        //尾部为空就插入到尾部
+                        //尾部为空就插入到尾部 尾插法
                         p.next = newNode(hash, key, value, null);
                         //binCount>=7，即链表长度大于8的时候就会树化
                         if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st

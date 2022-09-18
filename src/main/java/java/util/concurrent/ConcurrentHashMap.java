@@ -595,7 +595,7 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     static final int MOVED     = -1; // hash for forwarding nodes
     static final int TREEBIN   = -2; // hash for roots of trees
     static final int RESERVED  = -3; // hash for transient reservations
-    //16进制的2的31
+    //16进制的2^30
     static final int HASH_BITS = 0x7fffffff; // usable bits of normal node hash
 
     /** Number of CPUS, to place bounds on some sizings */
@@ -1022,17 +1022,20 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
         if (key == null || value == null) throw new NullPointerException();
         int hash = spread(key.hashCode());
         int binCount = 0;
+        //table 是通过  volatile 修饰的
         for (Node<K,V>[] tab = table;;) {
-            Node<K,V> f; int n, i, fh;
+            Node<K,V> f;
+            int n, i, fh;
             if (tab == null || (n = tab.length) == 0)
                 //初始化容量 与  resize() 类似
                 //不同点： 方法以及线程安全的判断 通过UnSafe类的 compareAndSwapInt() 来放入数组
                 tab = initTable();
-            //当头结点为null时
-                //读取元素
-                //这里是以volatile读的方式读取table数组中的元素，
+
+
+                //当尾结点为null时
                 //主要通过Unsafe这个类来实现的，保证其他线程改变了这个数组中的值的情况下，在当前线程get的时候能拿到。
             else if ((f = tabAt(tab, i = (n - 1) & hash)) == null) {
+                //new 一个新节点
                 //使用CAS操作来保证数据能正确的写入。
                 if (casTabAt(tab,
                         i,
@@ -1042,14 +1045,14 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
                     break;                   // no lock when adding to empty bin
             }
             else if ((fh = f.hash) == MOVED)
-                //正在扩容
+                //如果在扩容的时候传输，通过Unsafe帮助传输
                 tab = helpTransfer(tab, f);
 
-            //头结点不为null
+            //尾结点不为null
             else {
                 V oldVal = null;
                 //使用synchronized加锁
-                //当头结点不为null时，则使用该头结点加锁，这样就能多线程去put hashCode相同的时候不会出现数据丢失的问题.
+                //当尾结点不为null时，则使用该头结点加锁，这样就能多线程去put hashCode相同的时候不会出现数据丢失的问题.
                 // synchronized是互斥锁，有且只有一个线程能够拿到这个锁，从而保证了put操作是线程安全的。
                 synchronized (f) {
                     //同理

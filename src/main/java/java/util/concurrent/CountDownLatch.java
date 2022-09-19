@@ -152,6 +152,8 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  *
  * @since 1.5
  * @author Doug Lea
+ *
+ * 必须等待持有CountDownLatch的当前线程执行完才能继续使用
  */
 public class CountDownLatch {
     /**

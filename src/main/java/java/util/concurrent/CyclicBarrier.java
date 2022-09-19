@@ -133,7 +133,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @since 1.5
  * @see CountDownLatch
- *
+ * 与CountDownLatch相比； 可以循环使用
  * @author Doug Lea
  */
 public class CyclicBarrier {
